@@ -1,4 +1,5 @@
 import psutil
+import asyncio
 
 def get_cpu_usage(interval=1):
     return psutil.cpu_percent(interval=interval)
@@ -19,3 +20,6 @@ def get_stats(interval):
         'cpu_temp': cpu_temp,
         'ram_usage': ram_usage,
     }
+
+async def get_stats_async(interval):
+    return await asyncio.to_thread(get_stats, interval)

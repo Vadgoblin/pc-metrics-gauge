@@ -3,20 +3,13 @@ from time import sleep
 import network
 import requests
 import time
-
 import wifi
 import config
 
+from gauge import SimpleGauge
 
-pwm1 = PWM(Pin(14))
-pwm1.freq(10_000)
-
-pwm2 = PWM(Pin(15))
-pwm2.freq(10_000)
-
-pwm1.duty_u16(0)
-pwm2.duty_u16(0)
-
+g1 = SimpleGauge(Pin(14))
+g2 = SimpleGauge(Pin(15))
 
 while True:
     try:
@@ -39,7 +32,8 @@ while True:
         cpu_usage = max(0,min(100, cpu_usage))
         ram_usage = max(0,min(100, ram_usage))
         
-        pwm1.duty_u16(int(cpu_usage * config.DUTY_CYCLE_4_GAUGE_100_PERCENT / 100))
-        pwm2.duty_u16(int(cpu_temp * config.DUTY_CYCLE_4_GAUGE_100_PERCENT / 100))
-    except:  
+        g1.set_value(cpu_usage / 100)
+        g2.set_value(ram_usage / 100)
+    except Exception as e:
+        print(e)
         sleep(config.INTERVAL)

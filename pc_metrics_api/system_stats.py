@@ -10,15 +10,20 @@ def get_ram_usage():
 def get_cpu_temp():
     return psutil.sensors_temperatures()['k10temp'][0].current
 
+def get_swap_usage():
+    return psutil.swap_memory().percent
+
 def get_stats(interval):
     cpu_usage = get_cpu_usage(interval)
     cpu_temp = get_cpu_temp()
     ram_usage = get_ram_usage()
+    swap_usage = get_swap_usage()
 
     return {
         'cpu_usage': cpu_usage,
         'cpu_temp': cpu_temp,
         'ram_usage': ram_usage,
+        'swap_usage': swap_usage
     }
 
 async def get_stats_async(interval):

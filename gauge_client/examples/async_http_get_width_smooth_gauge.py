@@ -4,12 +4,13 @@ from time import sleep
 import wifi
 import config
 
-from metrics_collector import AsyncHttpGetMetricsCollector
+from metrics_collector import AsyncHttpGetMetricsCollector, AsyncWebsocketMetricsCollector
 from gauge import SmoothGauge
 
 g1 = SmoothGauge(Pin(14), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
 g2 = SmoothGauge(Pin(15), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
 metrics_collector = AsyncHttpGetMetricsCollector(config.GET_ENDPOINT, config.INTERVAL)
+metrics_collector = AsyncWebsocketMetricsCollector(config.WS_ENDPOINT, config.INTERVAL)
 
 async def main():
     while True:

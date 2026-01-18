@@ -23,7 +23,7 @@ async def main():
     interval = 0.5
     
     asd = AsyncWebsocketClient()
-    await asd.open(config.WS_ENDPOINT)
+    await asd.open()
     await asd.handshake(config.WS_ENDPOINT)
     await asd.send('{"interval": '+str(interval) +'}')
     
@@ -32,7 +32,7 @@ async def main():
     #asd.sock.setsockopt(usocket.IPPROTO_TCP, usocket.TCP_NODELAY, 1)
 
 
-    while False:
+    while True:
         i = await asd.recv()
         print(i)
         

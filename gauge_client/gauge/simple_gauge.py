@@ -10,5 +10,4 @@ class SimpleGauge:
     def set_value(self, value):
         if value < 0 or value > 1:
             raise Exception("Value must be beetween 0 and 1.")
-        print(value)
         self.pwm.duty_u16(int(value * self.max_duty))

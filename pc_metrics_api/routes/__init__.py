@@ -1,2 +1,2 @@
-from .stats_route import stats_blueprint
+from .http_get_route import http_get_blueprint
 from .websocket_route import websocket_blueprint

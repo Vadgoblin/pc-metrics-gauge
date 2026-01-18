@@ -1,8 +1,8 @@
 from quart import Quart
-from routes import stats_blueprint, websocket_blueprint
+from routes import http_get_blueprint, websocket_blueprint
 
 app = Quart(__name__)
-app.register_blueprint(stats_blueprint)
+app.register_blueprint(http_get_blueprint)
 app.register_blueprint(websocket_blueprint)
 
 

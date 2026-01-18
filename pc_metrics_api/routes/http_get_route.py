@@ -1,9 +1,9 @@
 from quart import Blueprint, request
 from system_stats import get_stats_async
 
-stats_blueprint = Blueprint('stats', __name__)
+http_get_blueprint = Blueprint('stats', __name__)
 
-@stats_blueprint.get('/stats')
+@http_get_blueprint.get('/stats')
 async def stats():
     interval = request.args.get('interval')
     if not interval:

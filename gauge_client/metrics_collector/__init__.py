@@ -1,1 +1,2 @@
 from .sync_http_get_metrics_collector import SyncHttpGetMetricsCollector
+from .async_http_get_metrics_collector import AsyncHttpGetMetricsCollector

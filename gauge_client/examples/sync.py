@@ -21,7 +21,7 @@ def main():
             print(e)
             g1.set_value(0)
             g2.set_value(0)
-            sleep(config.INTERVAL)
+            sleep(config.RETRY_INTERVAL)
             
 def loop():
     for metrics in metrics_collector:

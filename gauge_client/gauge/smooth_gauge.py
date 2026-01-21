@@ -10,7 +10,7 @@ def _is_in_event_loop():
         return False
 
 class SmoothGauge:
-    def __init__(self, pin, max_duty = 65535):
+    def __init__(self, pin, max_duty = 65535, update_interval=0.01, update_step=0.001):
         if not _is_in_event_loop():
             raise Exception("This requires asyncio")
         
@@ -22,8 +22,8 @@ class SmoothGauge:
         
         self.current_value=0
         self.target_value=0
-        self.update_interval=0.01
-        self.step=0.001
+        self.update_interval=update_interval
+        self.update_step=update_step
         
 
         
@@ -33,7 +33,7 @@ class SmoothGauge:
         while True:
             if self.current_value != self.target_value:
                 diff = self.target_value - self.current_value
-                diff = max(-self.step, min(self.step, diff))
+                diff = max(-self.update_step, min(self.update_step, diff))
                 self.current_value += diff
                 self.pwm.duty_u16(int(self.current_value * self.max_duty))
                 

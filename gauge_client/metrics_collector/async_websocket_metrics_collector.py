@@ -23,6 +23,7 @@ class AsyncWebsocketMetricsCollector:
         await self.websocket_client.open()
         await self.websocket_client.handshake(self.endpoint)
         await self.websocket_client.send('{"interval": '+str(self.interval) +'}')
+        self.is_connection_alive = True
         
     async def _try_receive_data(self):
         try:

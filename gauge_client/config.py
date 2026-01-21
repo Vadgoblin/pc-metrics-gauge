@@ -1,3 +1,8 @@
+import secrets
+
+SSID=secrets.SSID
+PASSWORD=secrets.PASSWORD
+
 DUTY_CYCLE_4_GAUGE_100_PERCENT = 52_000
 INTERVAL = 2
 GET_ENDPOINT = "http://192.168.0.10:4972/stats"

@@ -6,6 +6,9 @@ import config
 from metrics_collector import SyncHttpGetMetricsCollector
 from gauge import SimpleGauge
 
+
+wifi.connect(config.SSID, config.PASSWORD)
+
 g1 = SimpleGauge(Pin(14), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
 g2 = SimpleGauge(Pin(15), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
 metrics_collector = SyncHttpGetMetricsCollector(config.GET_ENDPOINT, config.INTERVAL)

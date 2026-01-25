@@ -1,5 +1,6 @@
 from async_websocket_client import AsyncWebsocketClient
 import json
+import uasyncio as asyncio
 
 class AsyncWebsocketMetricsCollector:
     def __init__(self, endpoint, interval):
@@ -17,7 +18,12 @@ class AsyncWebsocketMetricsCollector:
     async def _get_metrics(self):
         if not self.is_connection_alive:
             await self._setup_connection()
-        return await self._try_receive_data()
+            
+        try:
+            data = await asyncio.wait_for(self._try_receive_data(), self.interval * 3)
+        except asyncio.TimeoutError:
+            raise Exception("Metrics server response timeout.")
+        return data
         
     async def _setup_connection(self):
         await self.websocket_client.open()

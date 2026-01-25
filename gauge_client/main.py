@@ -8,11 +8,10 @@ from metrics_collector import AsyncHttpGetMetricsCollector, AsyncWebsocketMetric
 from gauge import SmoothGauge
 
 
-wifi.connect(config.SSID, config.PASSWORD)
-
-
 g1 = SmoothGauge(Pin(14), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
 g2 = SmoothGauge(Pin(15), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
+wifi.connect(config.SSID, config.PASSWORD)
+
 #metrics_collector = AsyncHttpGetMetricsCollector(config.GET_ENDPOINT, config.INTERVAL)
 metrics_collector = AsyncWebsocketMetricsCollector(config.WS_ENDPOINT, config.INTERVAL)
 

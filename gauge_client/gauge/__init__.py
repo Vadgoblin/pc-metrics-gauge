@@ -1,9 +1,11 @@
 from .simple_gauge import SimpleGauge
-from .smooth_gauge import SmoothGauge
 from .averaged_gauge import AveragedGauge
+from .smooth_gauge import SmoothGauge
+from .smoother_gauge import SmootherGauge
 
 __all__ = [
     "SimpleGauge",
+    "AveragedGauge",
     "SmoothGauge",
-    "AveragedGauge"
+    "SmootherGauge"
 ]

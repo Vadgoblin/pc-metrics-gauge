@@ -5,15 +5,15 @@ import wifi
 import config
 
 from metrics_collector import AsyncHttpGetMetricsCollector, AsyncWebsocketMetricsCollector
-from gauge import SmoothGauge
+from gauge import SmoothGauge, SmootherGauge
 
 
 # pinout of my board is kinda funky
 # 3 2 0 4
-g1 = SmoothGauge(Pin(3), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
-g2 = SmoothGauge(Pin(2), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
-g3 = SmoothGauge(Pin(0), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
-g4 = SmoothGauge(Pin(4), config.DUTY_CYCLE_4_GAUGE_100_PERCENT)
+g1 = SmootherGauge(Pin(3), config.DUTY_CYCLE_4_GAUGE_100_PERCENT, expected_value_update_interval=config.INTERVAL)
+g2 = SmootherGauge(Pin(2), config.DUTY_CYCLE_4_GAUGE_100_PERCENT, expected_value_update_interval=config.INTERVAL)
+g3 = SmootherGauge(Pin(0), config.DUTY_CYCLE_4_GAUGE_100_PERCENT, expected_value_update_interval=config.INTERVAL)
+g4 = SmootherGauge(Pin(4), config.DUTY_CYCLE_4_GAUGE_100_PERCENT, expected_value_update_interval=config.INTERVAL)
 
 wifi.connect(config.SSID, config.PASSWORD)
 

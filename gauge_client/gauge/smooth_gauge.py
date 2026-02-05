@@ -2,19 +2,9 @@ from machine import PWM
 from time import sleep
 import asyncio
 
-def _is_in_event_loop():
-    try:
-        loop = asyncio.get_event_loop()
-        return loop is not None
-    except Exception:
-        return False
 
 class SmoothGauge:
     def __init__(self, pin, max_duty = 65535, update_interval=0.01, update_step=0.001):
-        if not _is_in_event_loop():
-            raise Exception("This requires asyncio")
-        
-        
         self.max_duty = max_duty
         self.pwm = PWM(pin)
         self.pwm.freq(10_000)
